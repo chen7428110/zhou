@@ -1,0 +1,15 @@
+useradd jumpserver
+cd /home/jumpserver/
+mkdir /home/jumpserver/.ssh
+cd /home/jumpserver/.ssh/
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJmGTTr+ids/5dMH2KYnXON2omPuoR3rwgjv9lrtDxWhRcKbOhY29DNO5151fDl5QE9PIgbLzKxa3OaDHlwh/DK5BnNqg4XC6ctuozsaa5+khjIM9rp0vsc91e4BvF/rRJYT6uC2MYkSlHCJeuogccgcVxWIFyEMYRGY7unud1G700RamQCPLi9HOlUeFV2jWXd/oRmZfKq5y+HPTwOSnzdDTPhFOPzMaVIVx4p0NE5x4407JxA2u3e/rTb7/vC+8O/MGs0++pJrfjl1+F65oJn5mDqcHr3l3aF+vMqwiZblQaPOP/JHL0Bv78Ju1fjeHOCf6Znd/XUsXF6Fe7V9H9 root@host"   > /home/jumpserver/.ssh/authorized_keys
+chmod 700 /home/jumpserver/.ssh
+chmod 400 /home/jumpserver/.ssh/authorized_keys
+echo "jumpserver  ALL=(ALL) NOPASSWD:  ALL"  >>/etc/sudoers
+
+	ansible -i allall  all -m shell -a 'echo "jumpserver  ALL=(ALL) NOPASSWD:  ALL"  >>/etc/sudoers'
+	ansible -i allall  all -m shell -a 'useradd jumpserver'
+ansible -i allall  all -m shell -a 'mkdir /home/jumpserver/.ssh'
+ansible -i allall  all -m shell -a 'echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJmGTTr+ids/5dMH2KYnXON2omPuoR3rwgjv9lrtDxWhRcKbOhY29DNO5151fDl5QE9PIgbLzKxa3OaDHlwh/DK5BnNqg4XC6ctuozsaa5+khjIM9rp0vsc91e4BvF/rRJYT6uC2MYkSlHCJeuogccgcVxWIFyEMYRGY7unud1G700RamQCPLi9HOlUeFV2jWXd/oRmZfKq5y+HPTwOSnzdDTPhFOPzMaVIVx4p0NE5x4407JxA2u3e/rTb7/vC+8O/MGs0++pJrfjl1+F65oJn5mDqcHr3l3aF+vMqwiZblQaPOP/JHL0Bv78Ju1fjeHOCf6Znd/XUsXF6Fe7V9H9 root@host"   >> /home/jumpserver/.ssh/authorized_keys'
+ansible -i allall all -m shell -a 'chown -R  jumpserver:jumpserver  /home/jumpserver/.ssh'
+ansible -i allall  all -m shell -a 'chown -R  jumpserver:jumpserver  /home/jumpserver/.ssh/authorized_keys'
